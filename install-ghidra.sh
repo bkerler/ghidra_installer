@@ -9,5 +9,5 @@ cp run_scaled ghidra_9.0/
 mv ghidra_9.0 ~/ghidra_9.0
 rm ghidra_9.0_PUBLIC_20190228.zip
 echo "Successfully installed Ghidra 9.0 to ~/ghirda_9.0."
-echo "cd to ~/ghidra_9.0 and run as: ./run_scaled --scaled=1.4 ./ghirdaRun"
+echo "cd to ~/ghidra_9.0 and run as: ./run_scaled --scaled=1.4 ./ghidraRun"
 
