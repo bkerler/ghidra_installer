@@ -22,7 +22,8 @@ Helper scripts to set up OpenJDK 11 and scale Ghidra for 4K on Ubuntu 18.04 / 18
 * To run :
 ```
 cp run_scaled ghidra_9.0/run_scaled
-cp ghidraRun ghidra_9.0/ghidraRun
-./run_scaled --scale=1.45 ./ghidraRun
+cp ghidra ghidra_9.0/ghidra
+cd ghidra_9.0
+./ghidra
 ```
-For other scales like factor 2, replace 1.45 with your desired scaling factor
+For other scales like factor 2, replace 1.45 with your desired scaling factor in the ghidra script
