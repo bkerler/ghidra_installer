@@ -1,0 +1,48 @@
+name=jdk-11.0.2
+alias=jdk-11.0.2
+priority=1101
+section=main
+
+hl rmid /usr/lib/jvm/jdk-11.0.2/bin/rmid
+hl java /usr/lib/jvm/jdk-11.0.2/bin/java
+hl keytool /usr/lib/jvm/jdk-11.0.2/bin/keytool
+hl jjs /usr/lib/jvm/jdk-11.0.2/bin/jjs
+hl pack200 /usr/lib/jvm/jdk-11.0.2/bin/pack200
+hl rmiregistry /usr/lib/jvm/jdk-11.0.2/bin/rmiregistry
+hl unpack200 /usr/lib/jvm/jdk-11.0.2/bin/unpack200
+hl orbd /usr/lib/jvm/jdk-11.0.2/bin/orbd
+hl servertool /usr/lib/jvm/jdk-11.0.2/bin/servertool
+hl tnameserv /usr/lib/jvm/jdk-11.0.2/bin/tnameserv
+hl jexec /usr/lib/jvm/jdk-11.0.2/lib/jexec
+jdkhl idlj /usr/lib/jvm/jdk-11.0.2/bin/idlj
+jdkhl jdeps /usr/lib/jvm/jdk-11.0.2/bin/jdeps
+jdkhl wsimport /usr/lib/jvm/jdk-11.0.2/bin/wsimport
+jdkhl jinfo /usr/lib/jvm/jdk-11.0.2/bin/jinfo
+jdkhl jstat /usr/lib/jvm/jdk-11.0.2/bin/jstat
+jdkhl jlink /usr/lib/jvm/jdk-11.0.2/bin/jlink
+jdkhl jmod /usr/lib/jvm/jdk-11.0.2/bin/jmod
+jdkhl jhsdb /usr/lib/jvm/jdk-11.0.2/bin/jhsdb
+jdkhl jps /usr/lib/jvm/jdk-11.0.2/bin/jps
+jdkhl jstack /usr/lib/jvm/jdk-11.0.2/bin/jstack
+jdkhl jrunscript /usr/lib/jvm/jdk-11.0.2/bin/jrunscript
+jdkhl javadoc /usr/lib/jvm/jdk-11.0.2/bin/javadoc
+jdkhl javap /usr/lib/jvm/jdk-11.0.2/bin/javap
+jdkhl jar /usr/lib/jvm/jdk-11.0.2/bin/jar
+jdkhl jaotc /usr/lib/jvm/jdk-11.0.2/bin/jaotc
+jdkhl javac /usr/lib/jvm/jdk-11.0.2/bin/javac
+jdkhl schemagen /usr/lib/jvm/jdk-11.0.2/bin/schemagen
+jdkhl jshell /usr/lib/jvm/jdk-11.0.2/bin/jshell
+jdkhl xjc /usr/lib/jvm/jdk-11.0.2/bin/xjc
+jdkhl rmic /usr/lib/jvm/jdk-11.0.2/bin/rmic
+jdkhl jdeprscan /usr/lib/jvm/jdk-11.0.2/bin/jdeprscan
+jdkhl jimage /usr/lib/jvm/jdk-11.0.2/bin/jimage
+jdkhl jstatd /usr/lib/jvm/jdk-11.0.2/bin/jstatd
+jdkhl jmap /usr/lib/jvm/jdk-11.0.2/bin/jmap
+jdkhl jdb /usr/lib/jvm/jdk-11.0.2/bin/jdb
+jdkhl serialver /usr/lib/jvm/jdk-11.0.2/bin/serialver
+jdkhl wsgen /usr/lib/jvm/jdk-11.0.2/bin/wsgen
+jdkhl jcmd /usr/lib/jvm/jdk-11.0.2/bin/jcmd
+jdkhl jarsigner /usr/lib/jvm/jdk-11.0.2/bin/jarsigner
+jdk appletviewer /usr/lib/jvm/jdk-11.0.2/bin/appletviewer
+jdk jconsole /usr/lib/jvm/jdk-11.0.2/bin/jconsole
+plugin mozilla-javaplugin.so /usr/lib/jvm/jdk-11.0.2/lib/IcedTeaPlugin.so
