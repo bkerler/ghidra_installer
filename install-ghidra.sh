@@ -6,6 +6,7 @@ unzip /tmp/ghidra9.zip
 ./install-scaling.sh
 cp ghidraRun ghidra-9.0/
 cp run_scaled ghidra-9.0/
-echo "Successfully installed Ghidra 9.0 to ghirda-9.0."
-echo "Run as: ./run_scaled --scaled=1.4 ./ghirdaRun"
+mv ghidra-9.0 ~/ghidra-9.0
+echo "Successfully installed Ghidra 9.0 to ~/ghirda-9.0."
+echo "cd to ~/ghidra-9.0 and run as: ./run_scaled --scaled=1.4 ./ghirdaRun"
 
