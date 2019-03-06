@@ -1,6 +1,8 @@
 #!/bin/sh
-wget https://download.java.net/java/GA/jdk11/9/GPL/openjdk-11.0.2_linux-x64_bin.tar.gz -o /tmp/openjdk-11.tar.gz
-sudo tar xfvz /tmp/openjdk-11.tar.gz --directory /usr/lib/jvm
+echo "Downloading JDK .. please wait..."
+wget https://download.java.net/java/GA/jdk11/9/GPL/openjdk-11.0.2_linux-x64_bin.tar.gz
+echo "Done downloading. Instlaling ..."
+sudo tar xfvz openjdk-11.0.2_linux-x64_bin.tar.gz --directory /usr/lib/jvm
 sudo cp .jdk-11.0.2.jinfo /usr/lib/jvm
 
 sudo update-alternatives --install /usr/bin/appletviewer appletviewer /usr/lib/jvm/jdk-11.0.2/bin/appletviewer 180
@@ -51,4 +53,5 @@ sudo update-alternatives --install /usr/bin/wsgen wsgen /usr/lib/jvm/jdk-11.0.2/
 sudo update-alternatives --install /usr/bin/wsimport wsimport /usr/lib/jvm/jdk-11.0.2/bin/wsimport 180
 sudo update-alternatives --install /usr/bin/xjc xjc /usr/lib/jvm/jdk-11.0.2/bin/xjc 180
 
-sudo update-java-alternatives -s java-11-openjdk-amd64
+sudo update-java-alternatives -s jdk-11.0.2
+rm openjdk-11.0.2_linux-x64_bin.tar.gz
