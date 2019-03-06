@@ -1,0 +1,19 @@
+[Desktop Entry]
+Comment[de_DE]=
+Comment=
+Exec=/opt/ghidra_9.0/run_scaled --scale=1.4 /opt/ghidra_9.0/ghidraRun
+GenericName[de_DE]=Ghidra Disassembler and Decompiler
+GenericName=Ghidra Disassembler and Decompiler
+Icon=/opt/ghidra_9.0/support/ghidra.ico
+MimeType=
+Name[de_DE]=Ghidra
+Name=Ghidra
+Path=/opt/ghidra_9.0
+StartupNotify=true
+Terminal=false
+TerminalOptions=
+Type=Application
+X-DBUS-ServiceName=
+X-DBUS-StartupType=
+X-KDE-SubstituteUID=false
+X-KDE-Username=
