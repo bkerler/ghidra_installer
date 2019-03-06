@@ -1,7 +1,7 @@
 [Desktop Entry]
 Comment[de_DE]=
 Comment=
-Exec=/opt/ghidra_9.0/run_scaled --scale=1.4 /opt/ghidra_9.0/ghidraRun
+Exec=/opt/ghidra_9.0/ghidra
 GenericName[de_DE]=Ghidra Disassembler and Decompiler
 GenericName=Ghidra Disassembler and Decompiler
 Icon=/opt/ghidra_9.0/support/ghidra.ico
