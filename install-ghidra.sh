@@ -1,7 +1,7 @@
 #!/bin/sh
 echo "Downloading ghidra"
 wget https://ghidra-sre.org/ghidra_9.0_PUBLIC_20190228.zip
-unzip /tmp/ghidra9.zip
+unzip ghidra_9.0_PUBLIC_20190228.zip
 ./install-jdk.sh
 ./install-scaling.sh
 cp ghidraRun ghidra-9.0/
