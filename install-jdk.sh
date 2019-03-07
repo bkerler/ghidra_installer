@@ -2,7 +2,7 @@
 echo "Downloading JDK .. please wait..."
 wget https://download.java.net/java/GA/jdk11/9/GPL/openjdk-11.0.2_linux-x64_bin.tar.gz
 echo "Done downloading. Instlaling ..."
-sudo tar xfvz openjdk-11.0.2_linux-x64_bin.tar.gz --directory /usr/lib/jvm
+sudo tar xzvf openjdk-11.0.2_linux-x64_bin.tar.gz --directory /usr/lib/jvm
 sudo cp .jdk-11.0.2.jinfo /usr/lib/jvm
 
 sudo update-alternatives --install /usr/bin/appletviewer appletviewer /usr/lib/jvm/jdk-11.0.2/bin/appletviewer 180
