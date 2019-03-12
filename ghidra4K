@@ -18,4 +18,4 @@ SCRIPT_DIR="${SCRIPT_FILE%/*}"
 export J2D_UISCALE=1
 
 # Launch Ghidra
-"${SCRIPT_DIR}"/support/launch.sh bg Ghidra "${MAXMEM}" "" ghidra.GhidraRun "$@"
+./run_scaled --scale=1.4 "${SCRIPT_DIR}"/support/launch.sh fg Ghidra "${MAXMEM}" "" ghidra.GhidraRun "$@"
