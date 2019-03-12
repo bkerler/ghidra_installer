@@ -7,7 +7,7 @@ Helper scripts to set up OpenJDK 11 and scale Ghidra for 4K on Ubuntu 18.04 / 18
 ```
 
 # or doing it manually :
-* Grab and install ghidra from https://ghirda-sre.org or https://github.com/NationalSecurityAgency/ghidra
+* Grab and install ghidra from https://ghidra-sre.org or https://github.com/NationalSecurityAgency/ghidra
 
 * Install OpenJDK 11:
 ```
