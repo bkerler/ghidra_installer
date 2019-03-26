@@ -1,14 +1,5 @@
---- /opt/ghidra_9.0/support/launch.sh	2019-03-12 07:50:24.528387869 +0100
+--- /opt/ghidra/support/launch.sh	2019-03-12 07:50:24.528387869 +0100
 +++ launch2.sh	2019-03-12 07:50:06.928418117 +0100
-@@ -27,7 +27,7 @@
- }
- 
- 
--VMARG_LIST=
-+VMARG_LIST="-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel -Dsun.java2d.dpiaware=false -Dswing.plaf.metal.controlFont=Tahoma -Dswing.plaf.metal.userFont=Tahoma"
- ARGS=()
- INDEX=0
- 
 @@ -147,7 +147,7 @@
  	VMARG_LIST+=" -Xnoagent" 
  	VMARG_LIST+=" -Djava.compiler=NONE" 
