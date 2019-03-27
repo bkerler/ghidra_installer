@@ -11,6 +11,8 @@ sudo rm -rf /opt/ghidra
 sudo mv ghidra_9.0.1 /opt/ghidra
 cp ghidra.desktop ~/Desktop/ghidra.desktop
 cp ghidra.desktop ~/Schreibtisch/ghidra.desktop
+cp ghidra4K.desktop ~/Desktop/ghidra4K.desktop
+cp ghidra4K.desktop ~/Schreibtisch/ghidra4K.desktop
 sudo ln -s /opt/ghidra/ghidra /usr/bin/ghidra
 sudo ln -s /opt/ghidra/ghidra4K /usr/bin/ghidra4K
 rm ghidra_9.0.1_PUBLIC_20190325.zip
