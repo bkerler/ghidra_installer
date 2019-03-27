@@ -1,0 +1,19 @@
+[Desktop Entry]
+Comment[de_DE]=
+Comment=
+Exec=/opt/ghidra/ghidra4K
+GenericName[de_DE]=Ghidra Disassembler and Decompiler
+GenericName=Ghidra Disassembler and Decompiler
+Icon=/opt/ghidra/support/ghidra.ico
+MimeType=
+Name[de_DE]=Ghidra4K
+Name=Ghidra4K
+Path=/opt/ghidra
+StartupNotify=true
+Terminal=false
+TerminalOptions=
+Type=Application
+X-DBUS-ServiceName=
+X-DBUS-StartupType=
+X-KDE-SubstituteUID=false
+X-KDE-Username=
