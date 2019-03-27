@@ -13,7 +13,6 @@ cp ghidra.desktop ~/Desktop/ghidra.desktop
 cp ghidra.desktop ~/Schreibtisch/ghidra.desktop
 sudo ln -s /opt/ghidra/ghidra /usr/bin/ghidra
 sudo ln -s /opt/ghidra/ghidra4K /usr/bin/ghidra4K
-patch -p0 -i patch.diff /opt/ghidra/support/launch.sh
 rm ghidra_9.0.1_PUBLIC_20190325.zip
 echo "Successfully installed Ghidra 9.0.1 to /opt/ghidra."
 echo "Run using: ghidra or ghidra4K"
