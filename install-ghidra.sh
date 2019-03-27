@@ -4,11 +4,11 @@ wget https://ghidra-sre.org/ghidra_9.0.1_PUBLIC_20190325.zip
 unzip ghidra_9.0.1_PUBLIC_20190325.zip
 ./install-jdk.sh
 ./install-scaling.sh
-cp ghidra ghidra/
-cp ghidra4K ghidra/
-cp run_scaled ghidra/
+cp ghidra ghidra_9.0.1/
+cp ghidra4K ghidra_9.0.1/
+cp run_scaled ghidra_9.0.1/
 sudo rm -rf /opt/ghidra
-sudo mv ghidra /opt/ghidra
+sudo mv ghidra_9.0.1 /opt/ghidra
 cp ghidra.desktop ~/Desktop/ghidra.desktop
 cp ghidra.desktop ~/Schreibtisch/ghidra.desktop
 sudo ln -s /opt/ghidra/ghidra /usr/bin/ghidra
