@@ -1,22 +1,24 @@
 #!/bin/sh
 echo "Downloading ghidra"
-wget https://ghidra-sre.org/ghidra_9.0.1_PUBLIC_20190325.zip
-unzip ghidra_9.0.1_PUBLIC_20190325.zip
+export GHIDRA=ghidra_9.0.2_PUBLIC_20190403.zip
+export GHIDRAVER=ghidra_9.0.2
+wget https://ghidra-sre.org/$GHIDRA
+unzip $GHIDRA
 ./install-jdk.sh
 ./install-scaling.sh
-cp ghidra ghidra_9.0.1/
-cp ghidra4K ghidra_9.0.1/
-cp run_scaled ghidra_9.0.1/
+cp ghidra $GHIDRAVER/
+cp ghidra4K $GHIDRAVER/
+cp run_scaled $GHIDRAVER/
 sudo rm -rf /opt/ghidra
-sudo mv ghidra_9.0.1 /opt/ghidra
+sudo mv $GHIDRAVER /opt/ghidra
 cp ghidra.desktop ~/Desktop/ghidra.desktop
 cp ghidra.desktop ~/Schreibtisch/ghidra.desktop
 cp ghidra4K.desktop ~/Desktop/ghidra4K.desktop
 cp ghidra4K.desktop ~/Schreibtisch/ghidra4K.desktop
 sudo ln -s /opt/ghidra/ghidra /usr/bin/ghidra
 sudo ln -s /opt/ghidra/ghidra4K /usr/bin/ghidra4K
-rm ghidra_9.0.1_PUBLIC_20190325.zip
-echo "Successfully installed Ghidra 9.0.1 to /opt/ghidra."
+rm $GHIDRA
+echo "Successfully installed Ghidra to /opt/ghidra."
 echo "Run using: ghidra or ghidra4K"
 echo "Edit /opt/ghidra/ghidra4K for other scaling factors than 1.4."
 
