@@ -1,6 +1,8 @@
 #!/bin/sh
+INSTALL_DIR=/opt
 echo "Downloading ghidra and installing to /opt"
 WGET=`which wget`
+SUDO=`which sudo 2> /dev/null`
 test -z "$WGET" && { echo Error: wget not found ; exit 1 ; }
 export GHIDRA=`$WGET -O - --quiet https://www.ghidra-sre.org | grep 'Download Ghidra' | sed 's/.*href=.//' | sed 's/".*//'`
 test -z "$GHIDRA" && { echo Error: could not find ghidra to download ; exit 1 ; }
@@ -20,9 +22,9 @@ unzip $GHIDRA > /dev/null || exit 1
 cp -f ghidra $GHIDRAVER/
 cp -f ghidra4K $GHIDRAVER/
 cp -f run_scaled $GHIDRAVER/
-sudo rm -rf /opt/ghidra
-sudo rm -rf /opt/$GHIDRAVER
-sudo mv $GHIDRAVER /opt/ || exit 1
+test -e $INSTALL_DIR/$GHIDRAVER && { echo Error: $GHIDRAVER is already installed ; exit 1 ; }
+$SUDO rm -rf $INSTALL_DIR/ghidra
+$SUDO mv $GHIDRAVER $INSTALL_DIR/ || exit 1
 rm $GHIDRA
 
 for dir in Desktop Schreibtisch; do
@@ -32,11 +34,11 @@ for dir in Desktop Schreibtisch; do
   }
 done
 rm -f /usr/bin/ghidra /usr/bin/ghidra4K /usr/local/bin/ghidra /usr/local/bin/ghidra4K
-sudo ln -s /opt/ghidra/ghidraRun /usr/local/bin/ghidra
-sudo ln -s /opt/ghidra/ghidra4K /usr/local/bin/ghidra4K
+$SUDO ln -s $INSTALL_DIR/ghidra/ghidraRun /usr/local/bin/ghidra
+$SUDO ln -s $INSTALL_DIR/ghidra/ghidra4K /usr/local/bin/ghidra4K
 
-cd /opt || exit 1
-sudo ln -s $GHIDRAVER ghidra
+cd $INSTALL_DIR || exit 1
+$SUDO ln -s $GHIDRAVER ghidra
 DIR=
 ls -td ghidra_*.* | while read dir; do
   test '!' -L "$dir" -a -d "$dir" -a -z "$DIR" -a '!' "$dir" = "$GHIDRAVER" && {
@@ -62,6 +64,6 @@ cd ~/.ghidra && {
 }
 
 echo
-echo "Successfully installed Ghidra to /opt/$GHIDRAVER"
+echo "Successfully installed Ghidra to $INSTALL_DIR/$GHIDRAVER"
 echo "Run using: ghidra or ghidra4K"
-echo "Edit /opt/ghidra/ghidra4K for other scaling factors than 1.4."
+echo "Edit $INSTALL_DIR/ghidra/ghidra4K for other scaling factors than 1.4."
