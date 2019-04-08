@@ -1,7 +1,7 @@
 #!/bin/sh
 echo "Downloading ghidra"
-export GHIDRA=ghidra_9.0.2_PUBLIC_20190403.zip
-export GHIDRAVER=ghidra_9.0.2
+export GHIDRA=`curl -s https://ghidra-sre.org | grep -o -E "ghidra_(.*).zip" | uniq`
+export GHIDRAVER=`echo $GHIDRA | grep -o -E "ghidra_(*.).(*.).(*.)"`
 wget https://ghidra-sre.org/$GHIDRA
 unzip $GHIDRA
 ./install-jdk.sh
