@@ -22,12 +22,12 @@ The script will automatically detect available versions for downloading at https
 
 * To run :
 
-For HD resolution:
+- For HD resolution:
 ```
 ghidra
 ```
 
-For 4K resolution:
+- For 4K resolution:
 ```
 ghidra4K
 ```
