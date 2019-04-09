@@ -1,5 +1,6 @@
 # ghidra_installer
-Helper scripts to set up OpenJDK 11 and scale Ghidra for 4K on Ubuntu 18.04 / 18.10
+Helper scripts to set up OpenJDK 11 and scale Ghidra for 4K on Ubuntu 16.x / 18.04 / 18.10
+The script will automatically detect available versions for downloading at https://ghidra-sre.org
 
 # To install ghidra :
 ```
@@ -20,10 +21,16 @@ Helper scripts to set up OpenJDK 11 and scale Ghidra for 4K on Ubuntu 18.04 / 18
 ```
 
 * To run :
+
+For HD resolution:
 ```
-cp run_scaled ghidra_9.0/run_scaled
-cp ghidra ghidra_9.0/ghidra
-cd ghidra_9.0
-./ghidra
+ghidra
 ```
-For other scales like factor 2, replace 1.45 with your desired scaling factor in the ghidra script
+
+For 4K resolution:
+```
+ghidra4K
+```
+
+Sometimes in order for the 4K version to work, you need to start the regular ghidra version at least once.
+For other scales like factor 2, replace 1.45 with your desired scaling factor in the ghidra4K script
