@@ -1,4 +1,5 @@
 #!/bin/sh
+
 INSTALL_DIR=/opt
 echo "Downloading ghidra and installing to /opt"
 WGET=`which wget`
@@ -16,6 +17,7 @@ wget -c https://ghidra-sre.org/$GHIDRA || exit 1
 echo
 echo Unpacking Ghidra ...
 unzip $GHIDRA > /dev/null || exit 1
+
 ./install-jdk.sh
 ./install-scaling.sh
 
