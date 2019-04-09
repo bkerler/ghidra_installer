@@ -4,7 +4,7 @@ The script will automatically detect available versions for downloading at https
 
 # To install ghidra :
 ```
-./install-ghidra.sh
+~$ ./install-ghidra.sh
 ```
 
 # or doing it manually :
@@ -12,24 +12,24 @@ The script will automatically detect available versions for downloading at https
 
 * Install OpenJDK 11:
 ```
-./install-jdk.sh
+~$ ./install-jdk.sh
 ```
 
 * Install Tools needed for proper 4k scaling:
 ```
-./install-scaling.sh
+~$ ./install-scaling.sh
 ```
 
 * To run :
 
-- For HD resolution:
+For HD resolution:
 ```
-ghidra
+~$ ghidra
 ```
 
-- For 4K resolution:
+For 4K resolution:
 ```
-ghidra4K
+~$ ghidra4K
 ```
 
 Sometimes in order for the 4K version to work, you need to start the regular ghidra version at least once.
