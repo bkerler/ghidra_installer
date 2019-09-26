@@ -2,8 +2,8 @@
 INSTALL_DIR=/opt
 
 echo "Downloading ghidra and installing to $INSTALL_DIR"
-WGET=`which wget`
-SUDO=`which sudo 2> /dev/null`
+export WGET=`which wget`
+export SUDO=`which sudo 2> /dev/null`
 test -e ./install-ghidra.sh || { echo Error: you must run the script from the ./install_ghidra/ directory ; exit 1 ; }
 test -z "$WGET" && { echo Error: wget not found ; exit 1 ; }
 
@@ -11,7 +11,7 @@ export GHIDRA=`$WGET -O - --quiet https://www.ghidra-sre.org | grep 'Download Gh
 test -z "$GHIDRA" && { echo Error: could not find ghidra to download ; exit 1 ; }
 export GHIDRAVER=`echo $GHIDRA | sed 's/_PUBLIC_.*//'`
 echo " $GHIDRA" | egrep -q '/' && { echo Error: invalid ghidra filename ; exit 1 ; }
-echo " $GHIDRA" | egrep -q '_PUBLIC_' || { echo Error: invalid ghidra filename ; exit 1 ; }
+echo " $GHIDRA" | egrep -q '.zip' || { echo Error: invalid ghidra filename ; exit 1 ; }
 test -d "$INSTALL_DIR" || { echo Error: install directory $INSTALL_DIR does not exist ; exit 1 ; }
 test -e $INSTALL_DIR/$GHIDRAVER && { echo Error: $GHIDRAVER is already installed ; exit 1 ; }
 
