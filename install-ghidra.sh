@@ -9,7 +9,7 @@ test -z "$WGET" && { echo Error: wget not found ; exit 1 ; }
 
 export GHIDRA=`$WGET -O - --quiet https://www.ghidra-sre.org | grep 'Download Ghidra' | sed 's/.*href=.//' | sed 's/".*//'`
 test -z "$GHIDRA" && { echo Error: could not find ghidra to download ; exit 1 ; }
-export GHIDRAVER=`echo $GHIDRA | sed 's/_PUBLIC_.*//'`
+export GHIDRAVER=`echo $GHIDRA | sed 's/_PUBLIC_.*//' | sed 's/_DEV_.*//'`
 echo " $GHIDRA" | egrep -q '/' && { echo Error: invalid ghidra filename ; exit 1 ; }
 echo " $GHIDRA" | egrep -q '.zip' || { echo Error: invalid ghidra filename ; exit 1 ; }
 test -d "$INSTALL_DIR" || { echo Error: install directory $INSTALL_DIR does not exist ; exit 1 ; }
@@ -21,10 +21,10 @@ wget -c https://ghidra-sre.org/$GHIDRA || exit 1
 echo
 echo Unpacking Ghidra ...
 unzip $GHIDRA > /dev/null || exit 1
+mv "$GHIDRAVER"_DEV $GHIDRAVER
 
 ./install-jdk.sh
 ./install-scaling.sh
-
 cp -f ghidra $GHIDRAVER/
 cp -f ghidra4K $GHIDRAVER/
 cp -f run_scaled $GHIDRAVER/
