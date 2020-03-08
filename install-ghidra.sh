@@ -47,11 +47,13 @@ rm $GHIDRA
 for dir in Desktop Schreibtisch; do
   test -d $HOME/$dir && {
     cp ghidra.desktop $HOME/$dir/ghidra.desktop
+    chown $USER:$USER $HOME/$dir/ghidra.desktop
   }
 done
 cp ghidra.desktop $HOME/.local/share/applications/ghidra.desktop
-$SUDO ln -s $INSTALL_DIR/ghidra/ghidraRun /usr/local/bin/ghidra
 $SUDO rm -f /usr/bin/ghidra /usr/local/bin/ghidra 
+$SUDO ln -s $INSTALL_DIR/ghidra/ghidraRun /usr/local/bin/ghidra
+
 
 cd $INSTALL_DIR || exit 1
 $SUDO ln -sf $GHIDRAVER ghidra
