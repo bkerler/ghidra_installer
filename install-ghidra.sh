@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 INSTALL_DIR=/opt
 
 echo "Downloading ghidra and installing to $INSTALL_DIR"
@@ -28,14 +28,6 @@ echo
 echo Unpacking Ghidra ...
 unzip "$GHIDRA" > /dev/null || exit 1
 mv "$GHIDRADIR" "$GHIDRAVER"
-
-PKG_OK=$(dpkg-query -W --showformat='${Status}\n' openjdk-11-jdk|grep "install ok installed")
-if [ "" == "$PKG_OK" ]; then
-  echo "Downloading JDK .. please wait..."
-  sudo add-apt-repository ppa:openjdk-r/ppa -y > /dev/null 2>&1
-  sudo apt update
-  sudo apt install openjdk-11-jdk -y
-fi
 
 cp -f ghidra $GHIDRAVER/
 cp -f ghidra.png $GHIDRAVER/
@@ -88,6 +80,14 @@ then
     sed -i 's/VMARGS_LINUX=-Dsun.java2d.uiScale=1/VMARGS_LINUX=-Dsun.java2d.uiScale=2/g' /opt/ghidra/support/launch.properties
 fi
 
+PKG_OK=$(dpkg-query -W --showformat='${Status}\n' openjdk-11-jdk | grep "install ok installed")
+
+if [ "" == "$PKG_OK" ]; then
+  echo "Downloading JDK .. please wait..."
+  sudo add-apt-repository ppa:openjdk-r/ppa -y > /dev/null 2>&1
+  sudo apt update
+  sudo apt install openjdk-11-jdk -y
+fi
 
 echo
 echo "Successfully installed Ghidra version $GHIDRAVER to $INSTALL_DIR/$GHIDRADIR"
