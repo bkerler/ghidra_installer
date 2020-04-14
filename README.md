@@ -7,7 +7,8 @@ The script will automatically detect available versions for downloading at https
    ~$ sudo apt install git
    ~$ cd /tmp
    /tmp$ git clone https://github.com/bkerler/ghidra_installer
-   /tmp$ ./install-ghidra.sh
+   /tmp$ cd ghidra_installer
+   /tmp/ghidra_installer$ ./install-ghidra.sh
    ```
 
 # or doing it manually :
