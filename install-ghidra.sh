@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 INSTALL_DIR=/opt
 
 echo "Downloading ghidra and installing to $INSTALL_DIR"
@@ -29,24 +29,23 @@ echo Unpacking Ghidra ...
 unzip "$GHIDRA" > /dev/null || exit 1
 mv "$GHIDRADIR" "$GHIDRAVER"
 
-./install-jdk.sh
-./install-scaling.sh
 cp -f ghidra $GHIDRAVER/
-cp -f ghidra4K $GHIDRAVER/
-cp -f run_scaled $GHIDRAVER/
+cp -f ghidra.png $GHIDRAVER/
+
 $SUDO rm -rf $INSTALL_DIR/ghidra
 $SUDO mv $GHIDRAVER $INSTALL_DIR/ || exit 1
 rm $GHIDRA
 
 for dir in Desktop Schreibtisch; do
-  test -d ~/$dir && {
-    cp ghidra.desktop ~/$dir/ghidra.desktop
-    cp ghidra4K.desktop ~/$dir/ghidra4K.desktop
+  test -d $HOME/$dir && {
+    cp ghidra.desktop $HOME/$dir/ghidra.desktop
+    chown $USER:$USER $HOME/$dir/ghidra.desktop
   }
 done
-rm -f /usr/bin/ghidra /usr/bin/ghidra4K /usr/local/bin/ghidra /usr/local/bin/ghidra4K
+cp ghidra.desktop $HOME/.local/share/applications/ghidra.desktop
+$SUDO rm -f /usr/bin/ghidra /usr/local/bin/ghidra 
 $SUDO ln -s $INSTALL_DIR/ghidra/ghidraRun /usr/local/bin/ghidra
-$SUDO ln -s $INSTALL_DIR/ghidra/ghidra4K /usr/local/bin/ghidra4K
+
 
 cd $INSTALL_DIR || exit 1
 $SUDO ln -sf $GHIDRAVER ghidra
@@ -62,19 +61,34 @@ ls -td ghidra_*.* | while read dir; do
 done
 
 GHIDRACFG=`echo .$GHIDRAVER | tr _ -`
-cd ~/.ghidra && {
+cd $HOME/.ghidra && {
   DIR=
   rm -rf $GHIDRACFG
   ls -td .ghidra-* | while read dir; do
     test '!' -L "$dir" -a -d "$dir" -a -z "$DIR" && {
       DIR=$dir
       ln -s $dir $GHIDRACFG
-      echo Symlinking ~/.ghidra/$dir to ~/.ghidra/$GHIDRACFG
+      echo Symlinking $HOME/.ghidra/$dir to $HOME/.ghidra/$GHIDRACFG
     }
   done
 }
 
+read -p "Shall I change scaling to factor 2 for 4K [Y/N]? " -n 1 -r
+echo    # (optional) move to a new line
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    sed -i 's/VMARGS_LINUX=-Dsun.java2d.uiScale=1/VMARGS_LINUX=-Dsun.java2d.uiScale=2/g' /opt/ghidra/support/launch.properties
+fi
+
+PKG_OK=$(dpkg-query -W --showformat='${Status}\n' openjdk-11-jdk | grep "install ok installed")
+
+if [ "" == "$PKG_OK" ]; then
+  echo "Downloading JDK .. please wait..."
+  sudo add-apt-repository ppa:openjdk-r/ppa -y > /dev/null 2>&1
+  sudo apt update
+  sudo apt install openjdk-11-jdk -y
+fi
+
 echo
 echo "Successfully installed Ghidra version $GHIDRAVER to $INSTALL_DIR/$GHIDRADIR"
-echo "Run using: ghidra or ghidra4K"
-echo "Edit $INSTALL_DIR/ghidra/ghidra4K for other scaling factors than 1.4."
+echo "Run using: ghidra"
