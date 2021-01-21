@@ -48,17 +48,24 @@ $SUDO ln -s $INSTALL_DIR/ghidra/ghidraRun /usr/local/bin/ghidra
 
 
 cd $INSTALL_DIR || exit 1
+OLD_DIR=`readlink ghidra`
 $SUDO ln -sf $GHIDRAVER ghidra
-DIR=
-ls -td ghidra_*.* | while read dir; do
-  test '!' -L "$dir" -a -d "$dir" -a -z "$DIR" -a '!' "$dir" = "$GHIDRAVER" && {
-     DIR=$dir
-     echo Copying customized scripts from $DIR to $GHIDRAVER
-     for dir in Ghidra/*/*/ghidra_scripts/; do
-       cp -nrv "$DIR/$dir"/* "$GHIDRAVER/$dir/" 2> /dev/null
-     done
+
+test -n "$OLD_DIR" && {
+  echo Syncing from previous ghidra direcory: $OLD_DIR
+  RSYNC=`command -v rsync 2> /dev/null`
+  test -n "$RSYNC" && {
+    echo Running $RSYNC to synchronize custom scripts to the new installation
+    rsync -v -r --ignore-existing --exclude='*/jython*' "$DIR/Ghidra/" "$GHIDRAVER/Ghidra/"
   }
-done
+  test -z "$RSYNC" && {
+    echo Warning: rsync not found, using old and incomplete copy process ...
+    echo Copying customized scripts from $DIR to $GHIDRAVER
+    for dir in $OLD_DIR/Ghidra/*/*/ghidra_scripts/; do
+      cp -nrv "$DIR/$dir"/* "$GHIDRAVER/$dir/" 2> /dev/null
+    done
+  }
+}
 
 GHIDRACFG=`echo .$GHIDRAVER | tr _ -`
 cd $HOME/.ghidra && {
