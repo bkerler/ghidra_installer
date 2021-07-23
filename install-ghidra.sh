@@ -1,30 +1,65 @@
 #!/bin/bash
 INSTALL_DIR=/opt
 
-echo "Downloading ghidra and installing to $INSTALL_DIR"
+echo "Downloading Ghidra and installing to $INSTALL_DIR"
 export WGET=`which wget`
 export SUDO=`which sudo 2> /dev/null`
 test -e ./install-ghidra.sh || { echo Error: you must run the script from the ./install_ghidra/ directory ; exit 1 ; }
 test -z "$WGET" && { echo Error: wget not found ; exit 1 ; }
 
-export GHIDRA=`$WGET -O - --quiet https://www.ghidra-sre.org | grep 'Download Ghidra' | sed 's/.*href=.//' | sed 's/".*//' | tail -1`
-test -z "$GHIDRA" && { echo Error: could not find ghidra to download ; exit 1 ; }
+#Checking to see if Java JDK is installed if not Install it first
+
+function install_java {
+  echo "Checking to see if Java is installed..."
+  PKG_OK=$(dpkg-query -W --showformat='${Status}\n' openjdk-11-jdk | grep "install ok installed")
+
+  if [ "" == "$PKG_OK" ]; then
+    echo "Downloading JDK .. please wait..."
+    sudo add-apt-repository ppa:openjdk-r/ppa -y > /dev/null 2>&1
+    sudo apt update
+    sudo apt install openjdk-11-jdk -y
+  fi
+}
+
+function 4k_scaling {
+  read -p "Shall I change scaling to factor 2 for 4K [Y/N]? " -n 1 -r
+  echo    # (optional) move to a new line
+  if [[ $REPLY =~ ^[Yy]$ ]]
+  then
+      sed -i 's/VMARGS_LINUX=-Dsun.java2d.uiScale=1/VMARGS_LINUX=-Dsun.java2d.uiScale=2/g' /opt/ghidra/support/launch.properties
+  fi
+}
+
+install_java
+
+#Link where to find Ghidra
+export GHIDRALINK=`$WGET -O - --quiet  https://github.com/NationalSecurityAgency/ghidra/releases/latest | grep 'releases/download/' | sed 's/.*href=..//' | sed 's/".*//' | tail -1`
+test -z "$GHIDRALINK" && { echo Error: could not find ghidra to download ; exit 1 ; }
+
+#Strip the link parts to just keep the zip file name
+export GHIDRA=`echo $GHIDRALINK | sed 's/^.*\(ghidra.*\).*$/\1/' `
 
 # This should result in the unpack directory in the ZIP
-export GHIDRADIR=`echo $GHIDRA | sed 's/_20[12][0-9].*//'`
+export GHIDRADIR=`echo $GHIDRA | sed 's/_20[12][0-9].*//' `
 
 # This should be the Ghidra Version
 export GHIDRAVER=`echo $GHIDRA | sed 's/_PUBLIC_.*//' | sed 's/_DEV_.*//' | sed 's/-BETA_.*//'`
 
-echo " $GHIDRA" | egrep -q '/' && { echo Error: invalid ghidra filename ; exit 1 ; }
-echo " $GHIDRA" | egrep -q '.zip' || { echo Error: invalid ghidra filename ; exit 1 ; }
+echo " $GHIDRA" | sed 's/^.*\(ghidra.*\).*$/\1/' | egrep -q '/' && { echo Error: invalid ghidra filename ; exit 1 ; }
+echo " $GHIDRA" | sed 's/^.*\(ghidra.*\).*$/\1/' | egrep -q '.zip' || { echo Error: invalid ghidra filename ; exit 1 ; }
 test -d "$INSTALL_DIR" || { echo Error: install directory $INSTALL_DIR does not exist ; exit 1 ; }
 echo "$GHIDRAVER"
 test -e $INSTALL_DIR/$GHIDRAVER && { echo Error: $GHIDRAVER is already installed ; exit 1 ; }
 
 echo "Downloading $GHIDRA with version $GHIDRAVER"
 echo
-wget -c "https://ghidra-sre.org/$GHIDRA" || exit 1
+wget -c --quiet "https://github.com/$GHIDRALINK" || exit 1
+
+echo "Checking Hashes"
+export DOWNLOADHASH=`wget -O - --quiet  https://github.com/NationalSecurityAgency/ghidra/releases/latest | grep 'SHA-256:' | grep 'code' | sed 's:.*<code>\(.*\)</code>.*:\1:p' | tail -1`
+test -z "$DOWNLOADHASH ghidra_10.0.1_PUBLIC_20210708.zip | sha256sum --check" && { echo Error: hashes do not match ; exit 1; }
+echo $DOWNLOADHASH ghidra_10.0.1_PUBLIC_20210708.zip | sha256sum --check
+
 echo
 echo Unpacking Ghidra ...
 unzip "$GHIDRA" > /dev/null || exit 1
@@ -43,6 +78,7 @@ for dir in Desktop Schreibtisch; do
     chown $USER:$USER $HOME/$dir/ghidra.desktop
   }
 done
+
 cp ghidra.desktop $HOME/.local/share/applications/ghidra.desktop
 $SUDO rm -f /usr/bin/ghidra /usr/local/bin/ghidra 
 $SUDO ln -s $INSTALL_DIR/ghidra/ghidraRun /usr/local/bin/ghidra
@@ -81,21 +117,8 @@ cd $HOME/.ghidra && {
   done
 }
 
-read -p "Shall I change scaling to factor 2 for 4K [Y/N]? " -n 1 -r
-echo    # (optional) move to a new line
-if [[ $REPLY =~ ^[Yy]$ ]]
-then
-    sed -i 's/VMARGS_LINUX=-Dsun.java2d.uiScale=1/VMARGS_LINUX=-Dsun.java2d.uiScale=2/g' /opt/ghidra/support/launch.properties
-fi
-
-PKG_OK=$(dpkg-query -W --showformat='${Status}\n' openjdk-11-jdk | grep "install ok installed")
-
-if [ "" == "$PKG_OK" ]; then
-  echo "Downloading JDK .. please wait..."
-  sudo add-apt-repository ppa:openjdk-r/ppa -y > /dev/null 2>&1
-  sudo apt update
-  sudo apt install openjdk-11-jdk -y
-fi
+#Turning off 4K scaling
+4k_scaling
 
 echo
 echo "Successfully installed Ghidra version $GHIDRAVER to $INSTALL_DIR/$GHIDRADIR"
