@@ -33,7 +33,7 @@ function 4k_scaling {
 install_java
 
 #Link where to find Ghidra
-export GHIDRALINK=`$WGET -O - --quiet  https://github.com/NationalSecurityAgency/ghidra/releases/latest | grep 'releases/download/' | sed 's/.*href=..//' | sed 's/".*//' | tail -1`
+export GHIDRALINK=`curl -s https://api.github.com/repos/NationalSecurityAgency/ghidra/releases/latest | grep "browser_download_url.*zip" | cut -d : -f 2,3 | tr -d \" | tr -d " "`
 test -z "$GHIDRALINK" && { echo Error: could not find ghidra to download ; exit 1 ; }
 
 #Strip the link parts to just keep the zip file name
@@ -53,7 +53,7 @@ test -e $INSTALL_DIR/$GHIDRAVER && { echo Error: $GHIDRAVER is already installed
 
 echo "Downloading $GHIDRA with version $GHIDRAVER"
 echo
-wget -c --quiet "https://github.com/$GHIDRALINK" || exit 1
+wget -c "$GHIDRALINK" || exit 1
 
 echo "Checking Hashes"
 export DOWNLOADHASH=`wget -O - --quiet  https://github.com/NationalSecurityAgency/ghidra/releases/latest | grep 'SHA-256:' | grep 'code' | sed 's:.*<code>\(.*\)</code>.*:\1:p' | tail -1`
