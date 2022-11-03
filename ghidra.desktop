@@ -1,7 +1,7 @@
 [Desktop Entry]
 Comment[de_DE]=
 Comment=
-Exec=/opt/ghidra/ghidra
+Exec=/usr/local/bin/ghidra
 GenericName[de_DE]=Ghidra Disassembler and Decompiler
 GenericName=Ghidra Disassembler and Decompiler
 Icon=/opt/ghidra/ghidra.png
