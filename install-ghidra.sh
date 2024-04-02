@@ -103,7 +103,7 @@ GHIDRACFG=`echo .$GHIDRAVER | tr _ -`
 cd $HOME/.ghidra && {
   DIR=
   rm -rf $GHIDRACFG
-  ls -td .ghidra-* | while read dir; do
+  ls -td .ghidra-* 2>/dev/null | while read dir; do
     test '!' -L "$dir" -a -d "$dir" -a -z "$DIR" && {
       DIR=$dir
       ln -s $dir $GHIDRACFG
