@@ -11,13 +11,13 @@ test -z "$WGET" && { echo Error: wget not found ; exit 1 ; }
 
 function install_java {
   echo "Checking to see if Java is installed..."
-  PKG_OK=$(dpkg-query -W --showformat='${Status}\n' openjdk-17-jdk | grep "install ok installed")
+  PKG_OK=$(dpkg-query -W --showformat='${Status}\n' openjdk-21-jdk | grep "install ok installed")
 
   if [ "" == "$PKG_OK" ]; then
     echo "Downloading JDK .. please wait..."
     $SUDO add-apt-repository ppa:openjdk-r/ppa -y > /dev/null 2>&1
     $SUDO apt update
-    $SUDO apt install openjdk-17-jdk -y
+    $SUDO apt install openjdk-21-jdk -y
   fi
 }
 
@@ -103,7 +103,7 @@ GHIDRACFG=`echo .$GHIDRAVER | tr _ -`
 cd $HOME/.ghidra && {
   DIR=
   rm -rf $GHIDRACFG
-  ls -td .ghidra-* | while read dir; do
+  ls -td .ghidra-* 2>/dev/null | while read dir; do
     test '!' -L "$dir" -a -d "$dir" -a -z "$DIR" && {
       DIR=$dir
       ln -s $dir $GHIDRACFG
